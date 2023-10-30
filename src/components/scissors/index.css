@@ -1,0 +1,32 @@
+.div {
+  background-color: #fff;
+  height: 100px;
+  width: 100px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+.btn {
+  background-color: #fff;
+  height: 30px;
+  width: 50px;
+  padding: 5px;
+  border-radius: 8px;
+  font-family: Bree Serif;
+  align-self: flex-end;
+}
+.popup-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+.row {
+  display: flex;
+  justify-content: space-evenly;
+  width: 200px;
+  flex-direction: row;
+  align-items: center;
+}
