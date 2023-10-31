@@ -10,7 +10,11 @@ const Rock = props => {
 
   return (
     <OptionList>
-      <GameButton type="button" className="bbtn" onClick={GETRESULT}>
+      <GameButton
+        type="button"
+        data-testid={`${id.toLowerCase()}Button`}
+        onClick={GETRESULT}
+      >
         <OptionImg src={imageUrl} alt={id} />
       </GameButton>
     </OptionList>

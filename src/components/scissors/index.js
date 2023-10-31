@@ -3,7 +3,18 @@ import Popup from 'reactjs-popup'
 
 import 'reactjs-popup/dist/index.css'
 import {IoMdClose} from 'react-icons/io'
-import {MainBg, Heading, BG, UL, IMG} from './scissors'
+import {
+  MainBg,
+  Heading,
+  BG,
+  UL,
+  IMG,
+  Resultpara,
+  ResultDiv,
+  Resdiv,
+  CustomButton,
+  Popimg,
+} from './scissors'
 
 import Rock from '../rock'
 
@@ -25,7 +36,7 @@ class Game extends Component {
   }
 
   set = id => {
-    this.setState({uChoice: id, gChoice: this.gameChoice()}, this.getFetch)
+    this.setState({uChoise: id, gChoice: this.gameChoice()}, this.getFetch)
   }
 
   Click = () => {
@@ -36,12 +47,13 @@ class Game extends Component {
     const {choicesList} = this.props
     const List = choicesList.map(each => each.id)
     const index = Math.floor(Math.random() * choicesList.length)
+
     return List[index]
   }
 
   getFetch = () => {
     const {uChoise, gChoice} = this.state
-
+    console.log(uChoise)
     if (uChoise === gChoice) {
       this.setState({status: GameStatus.draw})
     } else if (uChoise === 'ROCK') {
@@ -98,25 +110,29 @@ class Game extends Component {
     console.log(uObjList)
 
     return (
-      <MainBg>
-        <BG>
-          <p>You</p>
-          <IMG src={gobject.image} alt="your choice" />
-          <p>Other</p>
-          <IMG src={uObject.image} alt="opponent choice" />
-        </BG>
+      <MainBg colo>
+        <ResultDiv>
+          <Resdiv>
+            <Resultpara>You</Resultpara>
+            <IMG src={gobject.imageUrl} alt="your choice" />
+          </Resdiv>
+          <Resdiv>
+            <Resultpara>Other</Resultpara>
+            <IMG src={uObject.imageUrl} alt="opponent choice" />
+          </Resdiv>
+        </ResultDiv>
         <h1>YOU WON</h1>
-        <button type="button" onClick={this.Click}>
+        <CustomButton type="button" onClick={this.Click}>
           PLAY AGAIN
-        </button>
+        </CustomButton>
       </MainBg>
     )
   }
 
   GameLost = () => {
-    const {gChoice, uChoice} = this.state
+    const {gChoice, uChoise} = this.state
     const {choicesList} = this.props
-    const ulist = choicesList.filter(each => each.id === uChoice)
+    const ulist = choicesList.filter(each => each.id === uChoise)
     const gobj = ulist[0]
 
     const uObjList = choicesList.filter(each => each.id === gChoice)
@@ -124,25 +140,29 @@ class Game extends Component {
     console.log(uObjList)
 
     return (
-      <MainBg>
-        <BG>
-          <p>You</p>
-          <IMG src={gobj.image} alt="your choice" />
-          <p>Other</p>
-          <IMG src={uObject.image} alt="opponent choice" />
-        </BG>
+      <MainBg colo>
+        <ResultDiv>
+          <Resdiv>
+            <Resultpara>You</Resultpara>
+            <IMG src={gobj.imageUrl} alt="your choice" />
+          </Resdiv>
+          <Resdiv>
+            <Resultpara>Other</Resultpara>
+            <IMG src={uObject.imageUrl} alt="opponent choice" />
+          </Resdiv>
+        </ResultDiv>
         <h1>YOU LOST</h1>
-        <button type="button" onClick={this.Click}>
+        <CustomButton type="button" onClick={this.Click}>
           PLAY AGAIN
-        </button>
+        </CustomButton>
       </MainBg>
     )
   }
 
   GameDraw = () => {
-    const {gChoice, uChoice} = this.state
+    const {gChoice, uChoise} = this.state
     const {choicesList} = this.props
-    const ulist1 = choicesList.filter(each => each.id === uChoice)
+    const ulist1 = choicesList.filter(each => each.id === uChoise)
     const gobj = ulist1[0]
 
     const uObjList = choicesList.filter(each => each.id === gChoice)
@@ -150,17 +170,22 @@ class Game extends Component {
     console.log(uObjList)
 
     return (
-      <MainBg>
-        <BG>
-          <p>You</p>
-          <IMG src={gobj.image} alt="your choice" />
-          <p>Other</p>
-          <IMG src={uObject.image} alt="opponent choice" />
-        </BG>
+      <MainBg colo>
+        <ResultDiv>
+          <Resdiv>
+            <Resultpara>You</Resultpara>
+            <IMG src={gobj.imageUrl} alt="your choice" />
+          </Resdiv>
+
+          <Resdiv>
+            <Resultpara>Other</Resultpara>
+            <IMG src={uObject.imageUrl} alt="opponent choice" />
+          </Resdiv>
+        </ResultDiv>
         <h1>IT IS DRAW</h1>
-        <button type="button" onClick={this.Click}>
+        <CustomButton type="button" onClick={this.Click}>
           PLAY AGAIN
-        </button>
+        </CustomButton>
       </MainBg>
     )
   }
@@ -205,32 +230,33 @@ class Game extends Component {
           </div>
         </BG>
         <div>{this.renderView()}</div>
-
-        <Popup
-          model
-          trigger={
-            <button type="button" className="btn">
-              Rules
-            </button>
-          }
-          position="centre"
-        >
-          {close => (
-            <>
-              <button
-                type="button"
-                className="trigger-button"
-                onClick={() => close()}
-              >
-                <IoMdClose />
+        <>
+          <Popup
+            model
+            trigger={
+              <button type="button" className="btn">
+                Rules
               </button>
-              <img
-                src="https://assets.ccbp.in/frontend/react-js/rock-paper-scissor/rules-image.png "
-                alt="rules"
-              />
-            </>
-          )}
-        </Popup>
+            }
+            position="center"
+          >
+            {close => (
+              <>
+                <button
+                  type="button"
+                  className="trigger-button"
+                  onClick={() => close()}
+                >
+                  <IoMdClose />
+                </button>
+                <Popimg
+                  src="https://assets.ccbp.in/frontend/react-js/rock-paper-scissor/rules-image.png "
+                  alt="rules"
+                />
+              </>
+            )}
+          </Popup>
+        </>
       </MainBg>
     )
   }
