@@ -8,6 +8,8 @@ const Rock = props => {
     click(id)
   }
 
+  console.log(id.toLowerCase())
+
   return (
     <OptionList>
       <GameButton

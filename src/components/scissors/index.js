@@ -36,14 +36,14 @@ class Game extends Component {
   }
 
   set = id => {
-    this.setState({uChoise: id, gChoice: this.gameChoice()}, this.getFetch)
+    this.setState({uChoise: id, gChoice: this.GameChoice()}, this.GetFetch)
   }
 
   Click = () => {
     this.setState({status: GameStatus.inprogress})
   }
 
-  gameChoice = () => {
+  GameChoice = () => {
     const {choicesList} = this.props
     const List = choicesList.map(each => each.id)
     const index = Math.floor(Math.random() * choicesList.length)
@@ -51,9 +51,9 @@ class Game extends Component {
     return List[index]
   }
 
-  getFetch = () => {
+  GetFetch = () => {
     const {uChoise, gChoice} = this.state
-    console.log(uChoise)
+
     if (uChoise === gChoice) {
       this.setState({status: GameStatus.draw})
     } else if (uChoise === 'ROCK') {
@@ -99,7 +99,6 @@ class Game extends Component {
 
   GameWon = () => {
     const {uChoise, gChoice} = this.state
-    console.log(uChoise, gChoice)
 
     const {choicesList} = this.props
     const objList = choicesList.filter(each => each.id === uChoise)
@@ -107,7 +106,6 @@ class Game extends Component {
 
     const uObjList = choicesList.filter(each => each.id === gChoice)
     const uObject = uObjList[0]
-    console.log(uObjList)
 
     return (
       <MainBg colo>
@@ -121,7 +119,7 @@ class Game extends Component {
             <IMG src={uObject.imageUrl} alt="opponent choice" />
           </Resdiv>
         </ResultDiv>
-        <h1>YOU WON</h1>
+        <Resultpara>YOU WON</Resultpara>
         <CustomButton type="button" onClick={this.Click}>
           PLAY AGAIN
         </CustomButton>
@@ -137,7 +135,6 @@ class Game extends Component {
 
     const uObjList = choicesList.filter(each => each.id === gChoice)
     const uObject = uObjList[0]
-    console.log(uObjList)
 
     return (
       <MainBg colo>
@@ -151,7 +148,7 @@ class Game extends Component {
             <IMG src={uObject.imageUrl} alt="opponent choice" />
           </Resdiv>
         </ResultDiv>
-        <h1>YOU LOST</h1>
+        <Resultpara>YOU LOSE</Resultpara>
         <CustomButton type="button" onClick={this.Click}>
           PLAY AGAIN
         </CustomButton>
@@ -167,7 +164,6 @@ class Game extends Component {
 
     const uObjList = choicesList.filter(each => each.id === gChoice)
     const uObject = uObjList[0]
-    console.log(uObjList)
 
     return (
       <MainBg colo>
@@ -182,7 +178,7 @@ class Game extends Component {
             <IMG src={uObject.imageUrl} alt="opponent choice" />
           </Resdiv>
         </ResultDiv>
-        <h1>IT IS DRAW</h1>
+        <Resultpara>IT IS DRAW</Resultpara>
         <CustomButton type="button" onClick={this.Click}>
           PLAY AGAIN
         </CustomButton>
@@ -190,7 +186,7 @@ class Game extends Component {
     )
   }
 
-  renderView = () => {
+  RenderView = () => {
     const {status} = this.state
 
     switch (status) {
@@ -226,10 +222,10 @@ class Game extends Component {
           </Heading>
           <div className="div">
             <p>Score</p>
-            <p>{count}</p>
+            <p className="COUNT">{count}</p>
           </div>
         </BG>
-        <div>{this.renderView()}</div>
+        <div>{this.RenderView()}</div>
         <>
           <Popup
             model
@@ -238,6 +234,8 @@ class Game extends Component {
                 Rules
               </button>
             }
+            closeOnEscape
+            window
             position="center"
           >
             {close => (
